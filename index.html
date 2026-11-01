@@ -1,0 +1,383 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Prism — coin x-ray</title>
+<meta name="description" content="Paste any pump.fun coin address. Prism cuts the coin open and shows its dev history, bundles, fresh wallets and holder concentration, read live from Solana.">
+<meta name="theme-color" content="#0b0b0c">
+<meta property="og:title" content="Prism — coin x-ray">
+<meta property="og:description" content="Cut any pump.fun coin open: dev history, bundles, fresh wallets, top holders. Live from Solana.">
+<meta property="og:image" content="og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@300..800&family=Martian+Mono:wdth,wght@75..112.5,300..700&display=swap" rel="stylesheet">
+<script src="config.js"></script>
+<style>:root{--bg: #0b0b0c;--bg-2: #111113;--bg-3: #18181b;--line: rgba(255, 255, 255, .085);--line-2: rgba(255, 255, 255, .16);--fg: #f4f3f0;--fg-2: rgba(244, 243, 240, .64);--fg-3: rgba(244, 243, 240, .4);--ember: #ff4a1c;--ember-soft: rgba(255, 74, 28, .14);--sans: "Host Grotesk", ui-sans-serif, system-ui, sans-serif;--mono: "Martian Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;--pad: clamp(16px, 3vw, 40px);color-scheme:dark}@media (prefers-color-scheme: light){:root:not([data-theme=dark]){color-scheme:dark}}:root[data-theme=dark]{color-scheme:dark}*,*:before,*:after{box-sizing:border-box}[hidden]{display:none!important}html,body{overflow-x:clip}html{scroll-behavior:smooth;scroll-padding-top:72px;-webkit-text-size-adjust:100%}body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--sans);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.05;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .6 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}main,.nav,.foot{position:relative;z-index:1}img{display:block;max-width:100%}a{color:inherit}button{font:inherit;color:inherit}code{font-family:var(--mono);font-size:.86em;font-stretch:87.5%}:focus-visible{outline:2px solid var(--fg);outline-offset:3px}.sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}.skip{position:absolute;left:12px;top:-60px;z-index:50;background:var(--fg);color:var(--bg);padding:8px 12px;text-decoration:none}.skip:focus{top:12px}.eyebrow{display:inline-flex;align-items:center;gap:10px;margin:0 0 18px;font-family:var(--mono);font-stretch:87.5%;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--fg-2)}.tick{width:18px;height:1px;background:var(--fg-2);position:relative}.tick:after{content:"";position:absolute;right:-3px;top:-2px;width:5px;height:5px;border-radius:50%;background:var(--fg)}.label{font-family:var(--mono);font-stretch:87.5%;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--fg-3);margin:0}.nav{position:sticky;top:0;z-index:20;height:64px;display:flex;align-items:center;gap:24px;padding:0 var(--pad);background:#0b0b0cb8;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}.brand{display:flex;align-items:center;gap:8px;text-decoration:none;font-weight:650;font-size:19px;letter-spacing:-.03em;margin-right:auto;min-height:44px}.brand img{width:34px;height:34px;border-radius:8px;object-fit:cover;transform:scale(1.5);clip-path:circle(32%)}.nav-links{display:flex;gap:4px}.nav-links a{text-decoration:none;color:var(--fg-2);font-size:14px;padding:10px 12px;min-height:44px;display:inline-flex;align-items:center;border-radius:999px;transition:color .2s,background .2s}.nav-links a:hover{color:var(--fg);background:var(--bg-3)}.nav-links .tk{font-family:var(--mono);font-stretch:87.5%;font-size:12.5px;color:var(--fg);border:1px solid var(--line-2)}.nav-x{display:inline-grid;place-items:center;width:44px;height:44px;border-radius:50%;border:1px solid var(--line-2);color:var(--fg)}.stage{position:relative;display:grid;gap:28px 36px;align-items:center;grid-template-columns:minmax(290px,360px) minmax(0,1fr) minmax(290px,340px);grid-template-areas:"copy coin cards";min-height:calc(100svh - 64px);padding:28px var(--pad) 44px;background:radial-gradient(ellipse 46% 56% at 50% 46%,#17171a,#0b0b0c00 70%)}.stage:after{content:"";position:absolute;left:var(--pad);right:var(--pad);bottom:0;height:1px;background:var(--line)}.stage-copy{grid-area:copy;align-self:center;position:relative;z-index:2}.stage-coin{grid-area:coin;display:flex;flex-direction:column;align-items:center;min-width:0;position:relative;z-index:1}.stage-cards{grid-area:cards;display:flex;flex-direction:column;gap:10px;position:relative;z-index:2}.headline{margin:0 0 22px;font-weight:640;font-size:clamp(46px,5.1vw,86px);line-height:.9;letter-spacing:-.055em}.lede{margin:0 0 28px;color:var(--fg-2);font-size:16.5px;line-height:1.55;max-width:34ch;text-wrap:pretty}.legend{list-style:none;padding:16px 0 0;margin:0;border-top:1px solid var(--line);display:grid;gap:8px;font-size:13px;color:var(--fg-2)}.legend li{display:flex;align-items:center;gap:10px}.legend i{width:10px;height:10px;border-radius:50%;flex:none}.lg-w{background:var(--fg);box-shadow:0 0 10px #ffffff80}.lg-e{background:var(--ember);box-shadow:0 0 12px var(--ember)}.lg-r{background:var(--fg);box-shadow:0 0 0 2px var(--bg),0 0 0 3.5px var(--ember)}.token{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;align-items:center;margin:0 0 18px;padding:14px;border:1px solid var(--line);background:var(--bg-2)}.token img{width:52px;height:52px;border-radius:10px;object-fit:cover;background:var(--bg-3);grid-row:span 2}.token-id{min-width:0}.token-name{margin:0;font-weight:620;font-size:19px;letter-spacing:-.02em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.token-sym{font-family:var(--mono);font-stretch:87.5%;font-weight:400;font-size:12px;color:var(--fg-2)}.mint{display:inline-flex;gap:8px;align-items:center;background:none;border:0;padding:4px 0;cursor:pointer;font-family:var(--mono);font-stretch:87.5%;font-size:12px;color:var(--fg-2);min-height:32px}.mint .copy-ic{font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--fg-3);border:1px solid var(--line-2);padding:1px 6px;border-radius:99px}.mint:hover{color:var(--fg)}.token-links{grid-column:1 / -1;display:flex;gap:8px;padding-top:8px;border-top:1px solid var(--line)}.token-links a,.token-links button{font-family:var(--mono);font-stretch:87.5%;font-size:11px;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;color:var(--fg-2);background:none;border:1px solid var(--line-2);border-radius:999px;padding:8px 12px;cursor:pointer;min-height:36px;display:inline-flex;align-items:center}.token-links a:hover,.token-links button:hover{color:var(--fg);border-color:var(--fg-2)}.verdict{margin:0 0 22px}.verdict-line{margin:6px 0 4px;font-family:var(--mono);font-stretch:87.5%;font-size:15px;line-height:1.45;letter-spacing:-.02em}.verdict-line.ember{color:var(--ember)}.verdict-sub{margin:0;color:var(--fg-2);font-size:13px}.coin-box{position:relative;width:min(100%,calc(100svh - 230px),700px);aspect-ratio:1;min-width:260px}.coin-box canvas,.coin-box #coinFlat{position:absolute;inset:0;width:100%;height:100%}#coinFlat{object-fit:contain;transform:scale(1.6)}#coinDots{touch-action:manipulation}.coin-hint{position:absolute;left:50%;bottom:7%;transform:translate(-50%);margin:0;white-space:nowrap;font-family:var(--mono);font-stretch:87.5%;font-size:11px;letter-spacing:.04em;color:var(--fg-3);pointer-events:none}.coin-hint span{color:var(--fg);text-transform:uppercase;letter-spacing:.1em;margin-right:8px;padding:2px 7px;border:1px solid var(--line-2);border-radius:99px}.coin-hint.busy span{animation:blink 1.2s steps(2) infinite}@keyframes blink{50%{opacity:.35}}.tip{position:absolute;z-index:5;pointer-events:none;min-width:190px;max-width:250px;transform:translate(-50%,calc(-100% - 14px));background:#0b0b0cf0;border:1px solid var(--line-2);padding:10px 12px;font-family:var(--mono);font-stretch:87.5%;font-size:11.5px;line-height:1.5;box-shadow:0 18px 40px #00000080}.tip b{font-weight:500;font-size:12.5px;color:var(--fg);display:block}.tip .pc{font-size:20px;letter-spacing:-.04em;margin:2px 0}.tip .fl{display:inline-block;margin:4px 4px 0 0;padding:1px 7px;border-radius:99px;border:1px solid var(--line-2);color:var(--fg-2);font-size:10.5px}.tip .fl.e{color:var(--ember);border-color:#ff4a1c80}.tip .hint{color:var(--fg-3);font-size:10.5px;margin-top:6px;display:block}.slot{position:relative;display:flex;align-items:center;gap:0;width:min(100%,560px);margin-top:6px;border:1px solid var(--line-2);background:#111113e6;border-radius:999px;padding:5px 5px 5px 18px;transition:border-color .2s,box-shadow .2s}.slot:focus-within{border-color:#f4f3f08c;box-shadow:0 0 0 6px #ffffff0a,0 0 40px #ffffff0f}.slot-mark{width:12px;height:12px;border-radius:50%;border:2px solid var(--fg);flex:none;margin-right:12px;position:relative}.slot-mark:after{content:"";position:absolute;right:-2px;top:-2px;width:6px;height:6px;background:#111113}.slot input{flex:1;min-width:0;height:46px;border:0;outline:0;background:transparent;color:var(--fg);font-family:var(--mono);font-stretch:87.5%;font-size:13.5px;letter-spacing:-.01em}.slot-hint{position:absolute;left:48px;right:120px;top:50%;transform:translateY(-50%);color:var(--fg-3);font-family:var(--mono);font-stretch:87.5%;font-size:13px;pointer-events:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.slot button{height:46px;padding:0 22px;border:0;border-radius:999px;cursor:pointer;flex:none;background:var(--fg);color:var(--bg);font-weight:650;font-size:15px;letter-spacing:-.01em;transition:transform .15s,background .2s}.slot button:hover{background:#fff}.slot button:active{transform:scale(.97)}.slot button[disabled]{opacity:.6;cursor:progress}.slot-help{margin:10px 0 0;font-size:12.5px;color:var(--fg-3);text-align:center}.slot-status{margin:6px 0 0;min-height:1.4em;font-family:var(--mono);font-stretch:87.5%;font-size:12px;color:var(--fg-2);text-align:center}.slot-status.err{color:var(--ember)}.only-narrow{display:none}.card{position:relative;background:linear-gradient(180deg,#18181beb,#111113eb);border:1px solid var(--line);border-radius:4px;padding:12px 15px 13px;transition:border-color .4s}.card header{display:flex;align-items:baseline;gap:10px;margin-bottom:6px}.card .no{font-family:var(--mono);font-stretch:87.5%;font-size:10.5px;color:var(--fg-3)}.card h2{margin:0;font-size:14px;font-weight:600;letter-spacing:-.01em}.card .st{margin-left:auto;font-family:var(--mono);font-stretch:87.5%;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--fg-3)}.card[data-state=loading] .st{color:var(--fg-2);animation:blink 1.2s steps(2) infinite}.card[data-state=live] .st:before{content:"";display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--fg);margin-right:6px;vertical-align:1px}.card.flag{border-color:#ff4a1c73}.card.flag .st{color:var(--ember)}.card.flag[data-state=live] .st:before{background:var(--ember);box-shadow:0 0 8px var(--ember)}.idle-text{margin:0;font-size:13.5px;color:var(--fg-2);line-height:1.5}.val{display:flex;align-items:baseline;gap:10px;margin:2px 0 6px}.val strong{font-family:var(--mono);font-weight:450;font-stretch:87.5%;font-size:30px;letter-spacing:-.06em;line-height:1}.val span{font-size:12.5px;color:var(--fg-2)}.flag .val strong{color:var(--ember);text-shadow:0 0 24px rgba(255,74,28,.35)}.ln{margin:3px 0 0;font-size:12.5px;color:var(--fg-2);line-height:1.45}.ln.mono,.mono{font-family:var(--mono);font-stretch:87.5%;font-size:11.5px}.ln .e,.e{color:var(--ember)}.ln a{color:var(--fg);text-decoration:none;border-bottom:1px solid var(--line-2)}.ln a:hover{border-color:var(--fg)}.mini{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:2px}.mini li{display:grid;grid-template-columns:1fr auto auto;gap:10px;font-family:var(--mono);font-stretch:87.5%;font-size:11px;color:var(--fg-2);padding:3px 0;border-top:1px solid var(--line)}.mini li .tg{color:var(--fg-3)}.mini li .tg.e{color:var(--ember)}.mini li b{font-weight:450;color:var(--fg)}.bars{display:flex;gap:2px;height:6px;margin:10px 0 2px}.bars i{display:block;background:var(--fg);opacity:.85;min-width:2px}.bars i:nth-child(2n){opacity:.55}.card-notes{margin:8px 0 0;font-size:11px;color:var(--fg-3);line-height:1.4}.card-notes .e{color:var(--ember)}.sk{display:block;height:10px;border-radius:3px;background:linear-gradient(90deg,#ffffff0f,#ffffff29,#ffffff0f);background-size:200% 100%;animation:shimmer 1.3s linear infinite;margin:8px 0}.sk.big{height:30px;width:46%;margin:4px 0 10px}.w30{width:30%}.w40{width:40%}.w50{width:50%}.w60{width:60%}.w80{width:80%}.w90{width:90%}@keyframes shimmer{to{background-position:-200% 0}}.more{display:inline-block;margin-top:8px;font-family:var(--mono);font-stretch:87.5%;font-size:11px;color:var(--fg);text-decoration:none;letter-spacing:.04em}.more:hover{text-decoration:underline}.leaders{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1;overflow:visible}.leaders path{fill:none;stroke:#f4f3f038;stroke-width:1}.leaders circle{fill:var(--fg)}.leaders .e path,.leaders path.e{stroke:#ff4a1c99}.leaders circle.e{fill:var(--ember)}.leaders circle.ring{fill:none;stroke:#f4f3f059}section:not(.stage){padding:clamp(64px,9vw,120px) var(--pad);border-bottom:1px solid var(--line)}.sec-head{max-width:760px;margin-bottom:40px}.sec-head h2,.ext-copy h2,.tk-copy h2{margin:0 0 14px;font-weight:640;font-size:clamp(32px,4.2vw,58px);line-height:.98;letter-spacing:-.045em;text-wrap:balance}.sec-sub{margin:0;color:var(--fg-2);font-size:16.5px;max-width:58ch;text-wrap:pretty}.table-wrap{border:1px solid var(--line);background:var(--bg-2)}.hist{width:100%;border-collapse:collapse;font-size:13.5px}.hist th{text-align:left;font-family:var(--mono);font-stretch:87.5%;font-weight:400;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--fg-3);padding:12px 16px;border-bottom:1px solid var(--line)}.hist td{padding:12px 16px;border-bottom:1px solid var(--line);vertical-align:middle}.hist tr:last-child td{border-bottom:0}.hist .r{text-align:right;font-family:var(--mono);font-stretch:87.5%;font-size:12px}.hist .coin-c b{font-weight:600}.hist .coin-c a{font-family:var(--mono);font-stretch:87.5%;font-size:11px;color:var(--fg-3);text-decoration:none;display:block}.hist .coin-c a:hover{color:var(--fg)}.pill{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-stretch:87.5%;font-size:11px;padding:3px 9px;border-radius:99px;border:1px solid var(--line-2);color:var(--fg-2)}.pill:before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}.pill.migrated{color:var(--fg);border-color:#f4f3f073}.pill.trading{color:var(--fg)}.pill.dead,.pill.closed{color:var(--fg-3)}.notes{margin:14px 0 0;font-size:12.5px;color:var(--fg-3)}.how-grid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line-2)}.how-grid li{padding:26px 26px 10px 0;border-right:1px solid var(--line);margin-right:26px}.how-grid li:last-child{border-right:0;margin-right:0}.how-grid .no{display:block;font-family:var(--mono);font-stretch:87.5%;font-size:44px;font-weight:300;letter-spacing:-.06em;color:var(--fg-3);margin-bottom:18px}.how-grid h3{margin:0 0 10px;font-size:20px;font-weight:620;letter-spacing:-.02em}.how-grid p{margin:0 0 14px;color:var(--fg-2);font-size:14.5px;line-height:1.6}.flag-rule{display:flex;gap:10px;align-items:baseline;font-size:13px!important;color:var(--fg)!important}.flag-rule i{width:8px;height:8px;border-radius:50%;background:var(--ember);box-shadow:0 0 10px var(--ember);flex:none;transform:translateY(-1px)}.ext{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:clamp(32px,6vw,96px);align-items:center}.ext-copy .sec-sub{margin-bottom:28px}.btn-primary,.btn-ghost{display:inline-flex;align-items:center;gap:10px;min-height:50px;padding:0 24px;border-radius:999px;text-decoration:none;font-weight:640;font-size:15.5px;letter-spacing:-.01em;transition:transform .15s,background .2s,border-color .2s}.btn-primary{background:var(--fg);color:var(--bg)}.btn-primary:hover{background:#fff;transform:translateY(-1px)}.btn-ghost{border:1px solid var(--line-2);color:var(--fg)}.btn-ghost:hover{border-color:var(--fg-2)}.steps{list-style:none;counter-reset:s;margin:34px 0 0;padding:0;display:grid;gap:0;border-top:1px solid var(--line)}.steps li{counter-increment:s;display:grid;grid-template-columns:48px minmax(0,1fr);padding:16px 0;border-bottom:1px solid var(--line);color:var(--fg-2);font-size:15px;align-items:baseline}.steps li:before{content:counter(s,decimal-leading-zero);font-family:var(--mono);font-stretch:87.5%;font-size:13px;color:var(--fg)}.steps b{color:var(--fg);font-weight:600}.steps code{background:var(--bg-3);border:1px solid var(--line);padding:1px 6px;border-radius:4px;color:var(--fg)}.origin{display:inline-block;margin-top:4px;background:var(--bg-3);border:1px dashed var(--line-2);border-radius:6px;padding:4px 10px;font-family:var(--mono);font-stretch:87.5%;font-size:12.5px;color:var(--fg);cursor:pointer;max-width:100%;overflow-wrap:anywhere;text-align:left}.origin:hover{border-color:var(--fg-2)}.ext-fig{margin:0}.browser-frame{border:1px solid var(--line-2);border-radius:14px;overflow:hidden;background:var(--bg-2);box-shadow:0 40px 80px #00000073}.fb-bar{display:flex;align-items:center;gap:7px;padding:12px 14px;border-bottom:1px solid var(--line)}.fb-bar i{width:10px;height:10px;border-radius:50%;background:var(--bg-3);border:1px solid var(--line-2)}.fb-bar span{margin-left:12px;flex:1;font-family:var(--mono);font-stretch:87.5%;font-size:11px;color:var(--fg-3);background:var(--bg);border-radius:99px;padding:5px 12px}.fb-page{position:relative;height:360px;background:linear-gradient(var(--line) 1px,transparent 1px) 0 0 / 100% 48px,linear-gradient(90deg,var(--line) 1px,transparent 1px) 0 0 / 64px 100%}.fb-chart{position:absolute;left:24px;top:30px;width:46%;height:70%;border:1px solid var(--line);border-radius:8px;background:linear-gradient(180deg,rgba(255,255,255,.03),transparent)}.panel-shot{position:absolute;right:22px;bottom:22px;width:250px;background:#0e0e10;border:1px solid var(--line-2);border-radius:12px;padding:12px;box-shadow:0 24px 50px #0009}.ps-head{display:flex;align-items:center;gap:8px;font-size:13px}.ps-head img{width:20px;height:20px;border-radius:5px;object-fit:cover;transform:scale(1.45);clip-path:circle(34%)}.ps-head span{color:var(--fg-3);font-family:var(--mono);font-stretch:87.5%;font-size:10px;text-transform:uppercase;letter-spacing:.1em}.ps-verdict{margin:8px 0;padding:8px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}.ps-verdict .sk{margin:2px 0}.ps-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.ps-grid div{background:var(--bg-2);border:1px solid var(--line);border-radius:8px;padding:8px}.ps-grid p{margin:0;font-family:var(--mono);font-stretch:87.5%;font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--fg-3)}.ps-grid .sk{height:14px;margin:6px 0 0}.ps-link{margin:10px 0 0;font-family:var(--mono);font-stretch:87.5%;font-size:10.5px;color:var(--fg-2);text-align:right}.ext-fig figcaption{margin-top:14px;font-size:12.5px;color:var(--fg-3)}.token-sec{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(32px,6vw,96px);align-items:center}.tk-mark{position:relative;aspect-ratio:1;max-width:460px;width:100%;justify-self:center}.tk-mark img{width:100%;height:100%;object-fit:cover;border-radius:50%;-webkit-mask:radial-gradient(circle,#000 52%,transparent 70%);mask:radial-gradient(circle,#000 52%,transparent 70%);transform:scale(1.25)}.tk-copy h2{font-family:var(--mono);font-stretch:87.5%;font-weight:400;font-size:clamp(48px,7vw,104px);letter-spacing:-.07em}.tk-copy .sec-sub{margin-bottom:26px}.ca-box{display:flex;align-items:center;gap:12px;padding:10px 10px 10px 16px;border:1px solid var(--line-2);background:var(--bg-2);border-radius:12px;max-width:560px;margin-bottom:18px}.ca-box code{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:13px}.ca-box button{background:var(--bg-3);border:1px solid var(--line-2);border-radius:8px;padding:0 14px;min-height:40px;cursor:pointer;font-family:var(--mono);font-stretch:87.5%;font-size:11px;text-transform:uppercase;letter-spacing:.08em}.ca-wait{margin:0;display:inline-flex;padding:12px 18px;border:1px dashed var(--line-2);border-radius:12px;font-family:var(--mono);font-stretch:87.5%;font-size:13px;color:var(--fg-2)}.tk-actions{display:flex;gap:10px;flex-wrap:wrap}.foot{display:grid;grid-template-columns:auto 1fr auto;gap:20px;align-items:center;padding:30px var(--pad) 40px;color:var(--fg-3);font-size:13px}.foot p{margin:0}.foot-brand{display:flex;align-items:center;gap:8px;color:var(--fg);font-weight:640;letter-spacing:-.02em}.foot-brand img{width:26px;height:26px;border-radius:6px;object-fit:cover;transform:scale(1.5);clip-path:circle(32%)}.foot-x{color:var(--fg-2);text-decoration:none;min-height:44px;display:inline-flex;align-items:center}.rv{opacity:0;transform:translateY(18px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}.rv.in{opacity:1;transform:none}.card.pop{animation:pop .6s cubic-bezier(.2,.8,.2,1)}@keyframes pop{0%{opacity:.4;transform:translate(10px)}}@media (max-width: 1240px){.stage{grid-template-columns:minmax(260px,320px) minmax(0,1fr) minmax(270px,310px);gap:24px 24px}.headline{font-size:clamp(44px,4.8vw,64px)}}@media (max-width: 1080px){.stage{grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);grid-template-areas:"copy coin" "cards cards";min-height:0}.stage-cards{display:grid;grid-template-columns:1fr 1fr}.leaders{display:none}.coin-box{width:min(100%,560px)}.how-grid{grid-template-columns:1fr 1fr}.how-grid li:nth-child(2){border-right:0;margin-right:0}.how-grid li:nth-child(n+3){border-top:1px solid var(--line)}}@media (max-width: 1080px){.only-narrow{display:block}}@media (max-width: 760px){.stage{display:flex;flex-direction:column;align-items:stretch;padding-top:22px;gap:14px}.stage-copy{display:contents}.stage-copy>.eyebrow{order:1;align-self:flex-start;margin:0}.headline{order:2}.lede{order:3}.stage-coin{order:4}.token{order:5;margin:0}.verdict{order:6;margin:0}.legend{order:7}.stage-cards{order:8}.stage.scanned .lede{display:none}.stage-cards{grid-template-columns:minmax(0,1fr)}.headline{font-size:clamp(42px,12vw,58px);margin:0}.lede{font-size:15.5px;margin-bottom:18px}.legend{display:none}.stage.scanned .legend{display:grid}.coin-box{min-width:0;width:100%;margin:-30px 0 -16px}.coin-hint{bottom:3%}.slot{margin-top:14px}.slot{padding-left:14px}.slot-mark{margin-right:10px}.slot-hint{left:40px;right:104px;font-size:12.5px}.slot button{padding:0 18px}.nav{gap:6px}.nav-links a:not(.tk){display:none}.ext,.token-sec{grid-template-columns:minmax(0,1fr)}.tk-mark{max-width:300px}.how-grid{grid-template-columns:minmax(0,1fr)}.how-grid li{border-right:0;margin-right:0;border-top:1px solid var(--line);padding-right:0}.how-grid li:first-child{border-top:0}.how-grid .no{font-size:34px;margin-bottom:10px}.panel-shot{right:12px;bottom:12px;width:min(240px,72%)}.fb-page{height:320px}.fb-chart{width:60%;left:14px}.foot{grid-template-columns:minmax(0,1fr);gap:10px}.hist thead{display:none}.hist,.hist tbody,.hist tr,.hist td{display:block}.hist tr{display:grid;grid-template-columns:1fr 1fr;gap:6px 12px;padding:14px 16px;border-bottom:1px solid var(--line)}.hist tr:last-child{border-bottom:0}.hist td{padding:0;border:0;text-align:left!important}.hist td.coin-c{grid-column:1 / -1}.hist td[data-l]:before{content:attr(data-l);display:block;font-family:var(--mono);font-stretch:87.5%;font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--fg-3)}}@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}.rv{opacity:1;transform:none;transition:none}.sk,.card[data-state=loading] .st,.coin-hint.busy span{animation:none}}
+</style>
+</head>
+<body>
+<a class="skip" href="#xray">Skip to the x-ray</a>
+
+<header class="nav">
+  <a class="brand" href="#xray" aria-label="Prism home">
+    <img src="logo.png" alt="" width="34" height="34">
+    <span>Prism</span>
+  </a>
+  <nav class="nav-links" aria-label="Sections">
+    <a href="#xray">X-ray</a>
+    <a href="#how">Method</a>
+    <a href="#extension">Extension</a>
+    <a href="#token" class="tk">$<span data-cfg="TICKER">PRISM</span></a>
+  </nav>
+  <a class="nav-x" data-cfg-href="X" hidden aria-label="Prism on X">
+    <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M17.8 3h3.1l-6.8 7.7L22 21h-6.2l-4.9-6.3L5.3 21H2.2l7.2-8.3L1.8 3h6.4l4.4 5.8L17.8 3Zm-1.1 16.2h1.7L7.4 4.7H5.6l11.1 14.5Z"/></svg>
+  </a>
+</header>
+
+<main>
+<section class="stage" id="xray" aria-label="Coin x-ray">
+  <div class="stage-copy">
+    <p class="eyebrow"><span class="tick"></span>coin x-ray for pump.fun</p>
+    <h1 class="headline">See inside<br>any coin.</h1>
+    <p class="lede">Paste a coin address. Prism cuts it open and maps the wallets inside: who launched it, who bought in the first block, who showed up yesterday, who holds the most. Read live from Solana, every time.</p>
+
+    <div class="token" id="tokenCard" hidden>
+      <img id="tokenImg" alt="" width="52" height="52" hidden>
+      <div class="token-id">
+        <p class="token-name"><span id="tokenName"></span> <span class="token-sym" id="tokenSym"></span></p>
+        <button class="mint" id="mintCopy" type="button" aria-label="Copy coin address"><span id="mintShort"></span><span class="copy-ic" aria-hidden="true">copy</span></button>
+      </div>
+      <div class="token-links">
+        <a id="tokenPump" target="_blank" rel="noopener">pump.fun</a>
+        <button id="shareBtn" type="button">share x-ray</button>
+      </div>
+    </div>
+
+    <div class="verdict" id="verdictBox" hidden>
+      <p class="label">dev verdict</p>
+      <p class="verdict-line" id="verdictLine"></p>
+      <p class="verdict-sub" id="verdictSub"></p>
+    </div>
+
+    <ul class="legend" aria-label="Dot legend">
+      <li><i class="lg-w"></i>one dot = one holder, sized by % held</li>
+      <li><i class="lg-e"></i>bundled or dev-linked wallet</li>
+      <li><i class="lg-r"></i>fresh wallet, funded &lt;24h before buying</li>
+    </ul>
+  </div>
+
+  <div class="stage-coin">
+    <div class="coin-box" id="coinBox">
+      <canvas id="coinGl" aria-hidden="true"></canvas>
+      <img id="coinFlat" src="logo.png" alt="" hidden>
+      <canvas id="coinDots" role="img" aria-label="Holder map: one dot per wallet holding the coin"></canvas>
+      <div class="tip" id="tip" role="status" hidden></div>
+      <p class="coin-hint" id="coinHint"><span>idle</span> waiting for a coin address</p>
+    </div>
+    <form class="slot" id="scanForm" autocomplete="off">
+      <label class="sr" for="caInput">Coin address or coin link</label>
+      <span class="slot-mark" aria-hidden="true"></span>
+      <input id="caInput" name="ca" type="text" inputmode="text" spellcheck="false" aria-describedby="slotHelp" title="Coin address or link">
+      <span class="slot-hint" id="slotHint" aria-hidden="true">Paste a CA or coin link</span>
+      <button type="submit" id="scanBtn">X-ray</button>
+    </form>
+    <p class="slot-help" id="slotHelp">Works with a mint address, or a pump.fun, gmgn, axiom or dexscreener coin link.</p>
+    <p class="slot-status" id="slotStatus" role="status" aria-live="polite"></p>
+  </div>
+
+  <div class="stage-cards" id="cards">
+    <article class="card" data-k="dev" id="cardDev">
+      <header><span class="no">01</span><h2>Dev history</h2><span class="st"></span></header>
+      <div class="cb">
+        <p class="idle-text">Every coin this creator launched on pump.fun before, and how each one ended.</p>
+      </div>
+    </article>
+    <article class="card" data-k="bundles" id="cardBundles">
+      <header><span class="no">02</span><h2>Bundles</h2><span class="st"></span></header>
+      <div class="cb">
+        <p class="idle-text">Wallets that bought in the creation slot and the three after it, and who funded them.</p>
+      </div>
+    </article>
+    <article class="card" data-k="fresh" id="cardFresh">
+      <header><span class="no">03</span><h2>Fresh wallets</h2><span class="st"></span></header>
+      <div class="cb">
+        <p class="idle-text">Top-20 holders whose wallet was funded less than 24 hours before they bought.</p>
+      </div>
+    </article>
+    <article class="card" data-k="top10" id="cardTop">
+      <header><span class="no">04</span><h2>Top holders</h2><span class="st"></span></header>
+      <div class="cb">
+        <p class="idle-text">Share held by the ten biggest wallets, with the bonding curve and pools left out.</p>
+      </div>
+    </article>
+  </div>
+  <svg class="leaders" id="leaders" aria-hidden="true"></svg>
+</section>
+
+<section class="history" id="history" hidden aria-labelledby="historyTitle">
+  <div class="sec-head">
+    <p class="eyebrow"><span class="tick"></span>dev history</p>
+    <h2 id="historyTitle">Every earlier launch</h2>
+    <p class="sec-sub" id="historySub"></p>
+  </div>
+  <div class="table-wrap">
+    <table class="hist">
+      <thead><tr><th scope="col">Coin</th><th scope="col">Launched</th><th scope="col">Now</th><th scope="col" class="r">Mcap</th><th scope="col" class="r">Dev bought</th><th scope="col" class="r">Dev sold</th><th scope="col" class="r">First sell</th></tr></thead>
+      <tbody id="histBody"></tbody>
+    </table>
+  </div>
+  <p class="notes" id="histNotes"></p>
+</section>
+
+<section class="how" id="how" aria-labelledby="howTitle">
+  <div class="sec-head">
+    <p class="eyebrow"><span class="tick"></span>method</p>
+    <h2 id="howTitle">Four reads, straight from the chain.</h2>
+    <p class="sec-sub">No scores from a black box. Each block says what it read and where it stopped. When something can't be read, Prism says so instead of guessing.</p>
+  </div>
+  <ol class="how-grid">
+    <li>
+      <span class="no">01</span>
+      <h3>Dev history</h3>
+      <p>The creator comes from the coin's bonding-curve account. Prism walks up to 800 of that wallet's transactions, finds every pump.fun create it signed, and checks each coin's curve today: migrated, still trading, or dead.</p>
+      <p class="flag-rule"><i></i>Flags a dev who sold half his bag inside the first hour.</p>
+    </li>
+    <li>
+      <span class="no">02</span>
+      <h3>Bundles</h3>
+      <p>The mint's history is walked back to its first block. Every buy from the bonding curve in the creation slot and the next three is parsed, summed, then each buyer's first funding transfer is traced.</p>
+      <p class="flag-rule"><i></i>Flags 10%+ bought by non-dev wallets, or buyers that share a funder.</p>
+    </li>
+    <li>
+      <span class="no">03</span>
+      <h3>Fresh wallets</h3>
+      <p>For each of the top 20 holders: the wallet's first-ever transaction against the first time it held this coin. Under 24 hours apart means fresh. Wallets too busy to date are counted as unknown, not clean.</p>
+      <p class="flag-rule"><i></i>Flags when a quarter or more of dated holders are fresh.</p>
+    </li>
+    <li>
+      <span class="no">04</span>
+      <h3>Top holders</h3>
+      <p>Every token account Helius returns, grouped by owner. The bonding curve, pools and any program-owned account are taken out, so the number is wallets only.</p>
+      <p class="flag-rule"><i></i>Flags when ten wallets hold 35% or more.</p>
+    </li>
+  </ol>
+</section>
+
+<section class="ext" id="extension" aria-labelledby="extTitle">
+  <div class="ext-copy">
+    <p class="eyebrow"><span class="tick"></span>chrome extension</p>
+    <h2 id="extTitle">The x-ray, on the page you already have open.</h2>
+    <p class="sec-sub">Open a coin on pump.fun, axiom, gmgn or dexscreener and a small Prism panel reads it for you. It only looks at the page address. It never touches a wallet and never signs anything.</p>
+    <a class="btn-primary" href="prism-extension.zip" download id="extDownload">
+      <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" d="M12 3v12m0 0-5-5m5 5 5-5M4 20h16"/></svg>
+      Download prism-extension.zip
+    </a>
+    <ol class="steps">
+      <li><div><b>Unzip</b> prism-extension.zip somewhere you'll keep it.</div></li>
+      <li><div><b>Open</b> <code>chrome://extensions</code> in a new tab and switch on <b>Developer mode</b>, top right.</div></li>
+      <li><div><b>Click Load unpacked</b> and pick the unzipped <code>prism-extension</code> folder.</div></li>
+      <li><div><b>Paste this site's address</b> when Prism asks on first run:<br><button type="button" class="origin" id="originCopy" aria-label="Copy this site's address"><span id="originText"></span></button></div></li>
+    </ol>
+  </div>
+  <figure class="ext-fig" aria-label="The Prism panel as it appears on a coin page">
+    <div class="browser-frame">
+      <div class="fb-bar"><i></i><i></i><i></i><span>pump.fun/coin/…</span></div>
+      <div class="fb-page">
+        <div class="fb-chart" aria-hidden="true"></div>
+        <div class="panel-shot">
+          <div class="ps-head"><img src="logo.png" alt="" width="20" height="20"><b>Prism</b><span>x-ray</span></div>
+          <div class="ps-verdict"><span class="sk w80"></span></div>
+          <div class="ps-grid">
+            <div><p>dev</p><span class="sk w40"></span></div>
+            <div><p>bundles</p><span class="sk w50"></span></div>
+            <div><p>fresh</p><span class="sk w30"></span></div>
+            <div><p>top 10</p><span class="sk w40"></span></div>
+          </div>
+          <p class="ps-link">full x-ray →</p>
+        </div>
+      </div>
+    </div>
+    <figcaption>The panel docks to the corner, drags anywhere and folds into the Prism mark.</figcaption>
+  </figure>
+</section>
+
+<section class="token-sec" id="token" aria-labelledby="tokenTitle">
+  <div class="tk-mark" aria-hidden="true"><img src="logo.png" alt=""></div>
+  <div class="tk-copy">
+    <p class="eyebrow"><span class="tick"></span>the token</p>
+    <h2 id="tokenTitle">$<span data-cfg="TICKER">PRISM</span></h2>
+    <p class="sec-sub">The coin behind the x-ray, launched on pump.fun. Run it through Prism yourself.</p>
+    <div class="ca-box" id="caBox" hidden>
+      <span class="label">CA</span>
+      <code id="caText"></code>
+      <button type="button" id="caCopy">copy</button>
+    </div>
+    <p class="ca-wait" id="caWait">CA drops here at launch.</p>
+    <div class="tk-actions" id="tkActions" hidden>
+      <a class="btn-primary" id="buyBtn" target="_blank" rel="noopener">Buy $<span data-cfg="TICKER">PRISM</span></a>
+      <a class="btn-ghost" id="chartBtn" target="_blank" rel="noopener">Chart</a>
+      <a class="btn-ghost" id="selfXray" href="#xray">X-ray it</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="foot-brand"><img src="logo.png" alt="" width="26" height="26"><span>Prism</span></div>
+  <p>Reads public Solana data through Helius. Never asks for a wallet, never signs anything. Not financial advice.</p>
+  <a class="foot-x" data-cfg-href="X" hidden>X / Twitter</a>
+</footer>
+
+<script>(()=>{var Pe="attribute vec2 p;void main(){gl_Position=vec4(p,0.,1.);}",Te=`
+precision highp float;
+uniform vec2 uRes;
+uniform float uTime, uCut, uSweep, uRadar, uCamZ, uF, uOpen;
+uniform mat3 uInv;   // local-from-world
+uniform mat3 uRot;   // world-from-local
+const float RIM_R = 0.9, RIM_W = 0.1, IN_R = 0.56, IN_W = 0.048;
+
+float sdBox(vec2 p, vec2 b){ vec2 d = abs(p) - b; return length(max(d, 0.)) + min(max(d.x, d.y), 0.); }
+float extrude(float d2, float z, float h){ vec2 w = vec2(d2, abs(z) - h); return min(max(w.x, w.y), 0.) + length(max(w, 0.)); }
+vec2 swDir(){ return normalize(vec2(-0.62, 0.78)); }
+// what remains of the face / inner ring as the x-ray sweep passes
+float swKeep(vec2 p){ return dot(p, swDir()) - uSweep; }
+
+// 2D shapes in coin space (unit radius)
+float dRim(vec2 p){ return abs(length(p) - RIM_R) - RIM_W; }
+float dIn(vec2 p){ return max(abs(length(p) - IN_R) - IN_W, -swKeep(p)); }
+float dFace(vec2 p){ return max(length(p) - (RIM_R - RIM_W + 0.002), -swKeep(p)); }
+float dBars(vec2 p){
+  float L = 0.82 * smoothstep(0.05, 0.75, uCut);
+  float a = sdBox(p - vec2(-0.045, L * 0.5), vec2(0.045, L * 0.5));
+  float b = sdBox(p - vec2(L * 0.5, -0.045), vec2(L * 0.5, 0.045));
+  return min(a, b);
+}
+float inQ(vec2 p){ return max(-p.x, -p.y); }        // < 0 inside the top-right quarter
+vec3 wedgeOff(){ float e = uCut; return vec3(0.19 * e, 0.19 * e, 0.07 * e); }
+
+// returns (distance, material): 1 rim, 2 inner ring, 3 face, 4 bars, 5 wedge rim
+vec2 map(vec3 q){
+  vec2 r = vec2(1e5, 0.);
+  float notQ = -inQ(q.xy);
+  float d;
+  d = max(extrude(dRim(q.xy), q.z, 0.085), notQ); if (d < r.x) r = vec2(d, 1.);
+  d = max(extrude(dIn(q.xy), q.z, 0.062), notQ);  if (d < r.x) r = vec2(d, 2.);
+  d = max(extrude(dFace(q.xy), q.z, 0.034), notQ); if (d < r.x) r = vec2(d, 3.);
+  if (uCut > 0.01) { d = extrude(dBars(q.xy), q.z, 0.085 * smoothstep(0.0, 0.5, uCut)); if (d < r.x) r = vec2(d, 4.); }
+  vec3 w = q - wedgeOff();
+  float inW = inQ(w.xy);
+  d = max(extrude(dRim(w.xy), w.z, 0.085), inW);  if (d < r.x) r = vec2(d, 5.);
+  d = max(extrude(dIn(w.xy), w.z, 0.062), inW);   if (d < r.x) r = vec2(d, 2.);
+  d = max(extrude(dFace(w.xy), w.z, 0.034), inW); if (d < r.x) r = vec2(d, 3.);
+  return r;
+}
+vec3 nrm(vec3 p){
+  const vec2 k = vec2(1., -1.) * 0.0012;
+  return normalize(k.xyy * map(p + k.xyy).x + k.yyx * map(p + k.yyx).x + k.yxy * map(p + k.yxy).x + k.xxx * map(p + k.xxx).x);
+}
+// white parts in the plane, for the glow halo
+float d2White(vec2 p){
+  float d = max(dRim(p), -inQ(p));
+  d = min(d, max(dIn(p), -inQ(p)));
+  if (uCut > 0.01) d = min(d, dBars(p));
+  vec2 w = p - wedgeOff().xy;
+  d = min(d, max(dRim(w), inQ(w)));
+  return d;
+}
+
+void main(){
+  vec2 uv = (gl_FragCoord.xy - 0.5 * uRes) / (0.5 * uRes.y);
+  vec3 ro = uInv * vec3(0., 0., uCamZ);
+  vec3 rd = uInv * normalize(vec3(uv, -uF));
+  vec3 col = vec3(0.);
+  float alpha = 0.;
+
+  // march only inside the coin's slab |z| < 0.17
+  float H = 0.17;
+  float hit = 0., t = 0., mat = 0.;
+  if (abs(rd.z) > 1e-4) {
+    float ta = (H - ro.z) / rd.z, tb = (-H - ro.z) / rd.z;
+    float t0 = max(min(ta, tb), 0.), t1 = max(ta, tb);
+    t = t0;
+    for (int i = 0; i < 56; i++) {
+      if (t > t1) break;
+      vec2 h = map(ro + rd * t);
+      if (h.x < 0.0012) { hit = 1.; mat = h.y; break; }
+      t += max(h.x, 0.002);
+    }
+  }
+
+  vec3 L = normalize(vec3(-0.45, 0.65, 0.9));
+  if (hit > 0.5) {
+    vec3 p = ro + rd * t;
+    vec3 n = nrm(p);
+    vec3 nw = uRot * n;
+    vec3 vw = -normalize(vec3(uv, -uF));
+    float lam = max(dot(nw, L), 0.);
+    float fres = pow(max(1. - max(dot(nw, vw), 0.), 0.), 3.);
+    vec3 hv = normalize(L + vw);
+    float spec = pow(max(dot(nw, hv), 0.), 48.);
+    if (mat == 3.) {
+      float r = length(p.xy);
+      float grain = 0.012 * sin(r * 420.) + 0.008 * sin(atan(p.y, p.x) * 90. + r * 30.);
+      col = vec3(0.085 + grain) + vec3(0.07) * lam + vec3(0.35) * spec + vec3(0.18) * fres;
+    } else {
+      float side = 1. - abs(n.z);
+      col = vec3(0.98) * (0.8 + 0.2 * lam) - vec3(0.16) * side * (1. - lam) + vec3(0.45) * spec + vec3(0.2) * fres;
+    }
+    alpha = 1.;
+  }
+
+  // in-plane glow + x-ray lines
+  if (abs(rd.z) > 1e-4) {
+    float tp = -ro.z / rd.z;
+    vec2 pp = (ro + rd * tp).xy;
+    float d = d2White(pp);
+    float g = exp(-max(d, 0.) * 7.5) * 0.30 + exp(-max(d, 0.) * 28.) * 0.22;
+    float r = length(pp);
+    // sweep line crossing the face while it dissolves
+    float sweepLine = exp(-abs(swKeep(pp)) * 140.) * step(r, RIM_R - RIM_W) * step(-1.05, uSweep) * step(uSweep, 1.05);
+    // radar arm while data loads
+    float ang = atan(pp.y, pp.x);
+    float arm = mod(uTime * 2.6 - ang, 6.28318);
+    float radar = uRadar * step(r, RIM_R - RIM_W) * (exp(-arm * 2.8) * 0.16 + exp(-abs(arm - 0.02) * 220.) * 0.5) * smoothstep(0.02, 0.2, r);
+    // faint interior grid once open: the "inside" of the coin
+    vec2 gp = abs(fract(pp * 9.) - 0.5);
+    float grid = uOpen * step(r, RIM_R - RIM_W - 0.01) * smoothstep(0.47, 0.5, max(gp.x, gp.y)) * 0.05;
+    float a2 = (1. - alpha) * clamp(g + sweepLine * 0.9 + radar + grid, 0., 1.);
+    col = col * alpha + vec3(1.) * a2;
+    alpha = alpha + a2;
+  }
+  gl_FragColor = vec4(col, alpha);
+}`,ae=e=>1-Math.pow(1-e,3),ee=e=>e<.5?4*e*e*e:1-Math.pow(-2*e+2,3)/2,O=(e,t,n)=>Math.max(t,Math.min(n,e)),X=(e,t,n)=>e+(t-e)*n;function me(e,t){let n=Math.cos(e),r=Math.sin(e),i=Math.cos(t),d=Math.sin(t);return[[n,r*d,r*i],[0,i,-d],[-r,n*d,n*i]]}var ve=e=>new Float32Array([e[0][0],e[1][0],e[2][0],e[0][1],e[1][1],e[2][1],e[0][2],e[1][2],e[2][2]]),Ee=e=>[[e[0][0],e[1][0],e[2][0]],[e[0][1],e[1][1],e[2][1]],[e[0][2],e[1][2],e[2][2]]],Be=(e,t)=>[e[0][0]*t[0]+e[0][1]*t[1]+e[0][2]*t[2],e[1][0]*t[0]+e[1][1]*t[1]+e[1][2]*t[2],e[2][0]*t[0]+e[2][1]*t[1]+e[2][2]*t[2]];function qe(e,t=.76){let n=[],r=Math.PI*(3-Math.sqrt(5)),i=e.reduce((s,u)=>s+u.r*u.r,0)||1,d=Math.max(.55,Math.min(2.6,Math.sqrt(.3*t*t/i))),c=(s,u,h)=>u>-.09-h&&Math.abs(s+.045)<.05+h||s>-.09-h&&Math.abs(u+.045)<.05+h;for(let s of e){let u=s.r*d,h=null;for(let v=0;v<5e3;v++){let x=(t-u)*Math.sqrt(v/5e3),o=v*r,$=x*Math.cos(o),y=x*Math.sin(o);if(c($,y,u))continue;let F=!0;for(let E of n){let B=E.x-$,R=E.y-y,I=E.r+u+.01;if(B*B+R*R<I*I){F=!1;break}}if(F){h={x:$,y};break}}h&&n.push({...s,x:h.x,y:h.y,r:u})}return n}function xe({gl:e,dots:t,fallbackImg:n,onHover:r,onClickDot:i,reduced:d}){let c=t.getContext("2d"),s=e.getContext("webgl",{premultipliedAlpha:!0,alpha:!0,antialias:!1})||null,u,h={},v=3.7,x=2.6;if(s){let p=(l,a)=>{let m=s.createShader(l);if(s.shaderSource(m,a),s.compileShader(m),!s.getShaderParameter(m,s.COMPILE_STATUS))throw new Error(s.getShaderInfoLog(m));return m};try{if(u=s.createProgram(),s.attachShader(u,p(s.VERTEX_SHADER,Pe)),s.attachShader(u,p(s.FRAGMENT_SHADER,Te)),s.linkProgram(u),!s.getProgramParameter(u,s.LINK_STATUS))throw new Error(s.getProgramInfoLog(u));s.useProgram(u);let l=s.createBuffer();s.bindBuffer(s.ARRAY_BUFFER,l),s.bufferData(s.ARRAY_BUFFER,new Float32Array([-1,-1,3,-1,-1,3]),s.STATIC_DRAW);let a=s.getAttribLocation(u,"p");s.enableVertexAttribArray(a),s.vertexAttribPointer(a,2,s.FLOAT,!1,0,0);for(let m of["uRes","uTime","uCut","uSweep","uRadar","uCamZ","uF","uInv","uRot","uOpen"])h[m]=s.getUniformLocation(u,m);s.clearColor(0,0,0,0)}catch(l){console.warn("Prism coin: WebGL unavailable, using the flat mark",l.message),u=null}}!u&&n&&(n.hidden=!1,e.hidden=!0);let o={w:0,h:0,glScale:1,dpr:1,cut:0,sweep:-1.2,radar:0,open:0,target:"idle",anim:[],dots:[],hover:null,focus:null,yaw:0,pitch:0,px:0,py:0,t0:performance.now(),last:0,visible:!0};function $(){let p=t.getBoundingClientRect();o.w=Math.max(1,p.width),o.h=Math.max(1,p.height),o.dpr=Math.min(window.devicePixelRatio||1,2),t.width=Math.round(o.w*o.dpr),t.height=Math.round(o.h*o.dpr);let l=Math.min(window.devicePixelRatio||1,1.5),a=o.w*o.h*l*l;o.glScale=l*(a>6e5?Math.sqrt(6e5/a):1),e.width=Math.round(o.w*o.glScale),e.height=Math.round(o.h*o.glScale)}function y(p,l,a,m=ee,b=0){o.anim=o.anim.filter(L=>L.key!==p),o.anim.push({key:p,from:o[p],to:l,start:performance.now()+b,ms:d?Math.min(a,200):a,ease:m})}let F=me(0,0);function E(p,l,a=0){let m=Be(F,[p,l,a]),b=x/(v-m[2]);return{x:o.w/2+m[0]*b*(o.h/2),y:o.h/2-m[1]*b*(o.h/2),s:b*(o.h/2)}}let B=p=>{let l=document.createElement("canvas");l.width=l.height=64;let a=l.getContext("2d"),m=a.createRadialGradient(32,32,0,32,32,32);return m.addColorStop(0,`rgba(${p},0.85)`),m.addColorStop(.25,`rgba(${p},0.35)`),m.addColorStop(1,`rgba(${p},0)`),a.fillStyle=m,a.fillRect(0,0,64,64),l},R=B("255,255,255"),I=B("255,74,28");function G(p){if(requestAnimationFrame(G),!o.visible)return;let l=(p-o.t0)/1e3;for(let M of o.anim){let ge=O((p-M.start)/M.ms,0,1);p>=M.start&&(o[M.key]=X(M.from,M.to,M.ease(ge))),M.done=ge>=1&&p>=M.start}o.anim=o.anim.filter(M=>!M.done);let a=o.open,m=d?.25:1,b=.52*Math.sin(l*.33*m)+.1*Math.sin(l*.71*m),L=.22+.16*Math.sin(l*.27*m),j=.13*Math.sin(l*.21*m),D=.1+.05*Math.sin(l*.17*m),K=X(b,j,a)+o.px*.18,oe=X(L,D,a)-o.py*.12;o.yaw+=(K-o.yaw)*.08,o.pitch+=(oe-o.pitch)*.08,F=me(o.yaw,o.pitch),u&&(s.viewport(0,0,e.width,e.height),s.clear(s.COLOR_BUFFER_BIT),s.uniform2f(h.uRes,e.width,e.height),s.uniform1f(h.uTime,l),s.uniform1f(h.uCut,o.cut),s.uniform1f(h.uSweep,o.sweep),s.uniform1f(h.uRadar,o.radar),s.uniform1f(h.uOpen,o.open),s.uniform1f(h.uCamZ,v),s.uniform1f(h.uF,x),s.uniformMatrix3fv(h.uRot,!1,ve(F)),s.uniformMatrix3fv(h.uInv,!1,ve(Ee(F))),s.drawArrays(s.TRIANGLES,0,3)),J(p)}function J(p){let l=c;if(l.setTransform(o.dpr,0,0,o.dpr,0,0),l.clearRect(0,0,o.w,o.h),!!o.dots.length){l.globalCompositeOperation="lighter";for(let a of o.dots){let m=O((p-a.born)/900,0,1),b=ae(m),L=a.dying?O(1-(p-a.dying)/380,0,1):1;if(L<=0)continue;let j=X(.42,a.x,b),D=X(.42,a.y,b),K=E(j,D,0);a.sx=K.x,a.sy=K.y,a.sr=Math.max(1.1,a.r*K.s*b);let oe=a.ember?I:R,M=a.sr*(a.ember?3.6:3);l.globalAlpha=(a.ember?.5:.28)*L*(o.focus&&!o.focus(a)?.15:1),l.drawImage(oe,a.sx-M,a.sy-M,M*2,M*2)}l.globalCompositeOperation="source-over";for(let a of o.dots){let m=a.dying?O(1-(p-a.dying)/380,0,1):1;if(m<=0||a.sr==null)continue;let b=o.focus&&!o.focus(a);l.globalAlpha=m*(b?.22:1),l.beginPath(),l.arc(a.sx,a.sy,a.sr,0,Math.PI*2),l.fillStyle=a.ember?"#ff4a1c":"rgba(246,245,242,0.94)",l.fill(),a.ring&&(l.lineWidth=Math.max(1.2,a.sr*.28),l.strokeStyle="#ff4a1c",l.beginPath(),l.arc(a.sx,a.sy,a.sr+l.lineWidth*1.4,0,Math.PI*2),l.stroke()),o.focus&&!b&&(l.lineWidth=1,l.strokeStyle=a.ember?"rgba(255,74,28,.8)":"rgba(255,255,255,.7)",l.beginPath(),l.arc(a.sx,a.sy,a.sr+3.5,0,Math.PI*2),l.stroke()),o.hover===a&&(l.lineWidth=1.5,l.strokeStyle="#fff",l.beginPath(),l.arc(a.sx,a.sy,a.sr+5,0,Math.PI*2),l.stroke())}l.globalAlpha=1,o.dots=o.dots.filter(a=>!(a.dying&&p-a.dying>400))}}function w(p,l){let a=null,m=1/0;for(let b of o.dots){if(b.dying||b.sr==null)continue;let L=b.sx-p,j=b.sy-l,D=Math.sqrt(L*L+j*j)-b.sr;D<Math.max(6,14-b.sr)&&D<m&&(m=D,a=b)}return a}let C=p=>{let l=t.getBoundingClientRect();return{x:p.clientX-l.left,y:p.clientY-l.top}};return t.addEventListener("pointermove",p=>{let l=C(p);o.px=O(l.x/o.w*2-1,-1,1),o.py=O(l.y/o.h*2-1,-1,1);let a=w(l.x,l.y);a!==o.hover&&(o.hover=a,t.style.cursor=a?"pointer":"",r&&r(a?{dot:a,x:a.sx,y:a.sy}:null))}),t.addEventListener("pointerleave",()=>{o.px=o.py=0,o.hover&&(o.hover=null,r&&r(null))}),t.addEventListener("click",p=>{let l=C(p),a=w(l.x,l.y);if(p.pointerType==="touch"||!a){o.hover=a,r&&r(a?{dot:a,x:a.sx,y:a.sy}:null);return}i&&i(a)}),new IntersectionObserver(p=>{o.visible=p[0].isIntersecting},{threshold:0}).observe(t),new ResizeObserver($).observe(t),$(),requestAnimationFrame(G),{open(){o.target="open",y("cut",1,900,ee),y("sweep",1.25,1100,ee,250),y("open",1,1200,ee,200),y("radar",1,400,ae,900)},loading(p){y("radar",p?1:0,500,ae)},clearDots(){let p=performance.now();for(let l of o.dots)l.dying||(l.dying=p);o.hover=null},setDots(p){let l=performance.now();for(let b of o.dots)b.dying||(b.dying=l);let a=p.map(b=>({...b,r:O(.011+Math.sqrt(Math.max(b.p,0))*.032,.011,.15)})).sort((b,L)=>L.r-b.r),m=qe(a);m.forEach((b,L)=>{b.born=l+120+L*(d?0:Math.min(6,900/m.length))}),o.dots.push(...m)},focus(p){o.focus=p||null},restyle(p){for(let l of o.dots)l.dying||Object.assign(l,p(l))},dotsLive:()=>o.dots.filter(p=>!p.dying),project:E,size:()=>({w:o.w,h:o.h}),hasGL:!!u}}var _e=/[1-9A-HJ-NP-Za-km-z]{32,44}/g;function De(e){let t=String(e||"").trim();if(!t)return null;let n=t;try{let i=new URL(t);n=i.pathname+" "+i.search}catch{}let r=n.match(_e)||[];return r.length?r[r.length-1]:null}var Oe=e=>new Promise(t=>setTimeout(t,e));function be({api:e,fetchJson:t}){let n=String(e||"").replace(/\/+$/,""),r=async c=>{let s;try{s=await t(n+c)}catch{return{error:"Prism API unreachable",offline:!0}}if(!s||s.status===0)return{error:"Prism API unreachable",offline:!0};let u=s.body;return!u||typeof u!="object"?{error:`Prism API answered ${s.status} without data`,offline:s.status>=404||s.status===0}:!s.ok||u.ok===!1?{error:u.error||`HTTP ${s.status}`}:{data:u}},i=0;async function d(c,s){let u=++i,h=()=>u===i,v=(w,...C)=>{h()&&s(w,...C)},x=De(c);if(!x){v("invalid","That is not a Solana address");return}v("start",x);let o=await r(`/api/resolve?address=${x}`);if(!h())return;if(o.error){v(o.offline?"offline":"invalid",o.error);return}let $=o.data.mint;v("mint",$);let y={mint:$,holders:null,dev:null,bundles:null,fresh:null,funding:null},F=r(`/api/holders?ca=${$}`).then(w=>(y.holders=w.data||null,v("block","holders",w.data||null,w.error||null,y),w.data)),E=r(`/api/dev?ca=${$}`).then(w=>(y.dev=w.data||null,v("block","dev",w.data||null,w.error||null,y),w.data));await Oe(350);let B=r(`/api/bundles?ca=${$}&slots=4`).then(w=>(y.bundles=w.data||null,v("block","bundles",w.data||null,w.error||null,y),w.data)),R=await F;if(!h())return;if(R&&R.holders&&R.holders.top20.length){let w=R.holders.top20.map(Q=>`${Q.wallet}:${Q.ta}`).join(","),C=await r(`/api/wallets?mint=${$}&w=${w}`);y.fresh=C.data||null,v("block","fresh",C.data||null,C.error||null,y)}else v("block","fresh",null,R?"no wallet holders to check":"couldn't read holders",y);let[I,G]=await Promise.all([B,E]);if(!h())return;let J=I&&I.creator||G&&G.creator||R&&R.curve&&R.curve.creator||null;if(I&&I.buyers&&I.buyers.length){let w=I.buyers.slice(0,20).map(Q=>Q.wallet),C=await r(`/api/wallets?mint=${$}&w=${w.join(",")}${J?`&creator=${J}`:""}`);y.funding=C.data||null,v("block","funding",C.data||null,C.error||null,y)}else v("block","funding",null,I?"no early buyers to trace":"couldn't read bundles",y);v("done",y)}return{run:d,cancel:()=>{i++}}}var q=e=>e?`${e.slice(0,4)}\u2026${e.slice(-4)}`:"";function A(e,t){if(e==null||!isFinite(e))return"\u2014";if(e>0&&e<.01)return"<0.01%";let n=t??(e<10?2:1);return`${e.toFixed(n)}%`}function te(e){if(e==null)return"\u2014";if(e<60)return`${Math.round(e)}s`;if(e<3600)return`${Math.round(e/60)}m`;if(e<86400){let r=Math.floor(e/3600),i=Math.round(e%3600/60);return i?`${r}h ${i}m`:`${r}h`}let t=Math.floor(e/86400),n=Math.round(e%86400/3600);return n?`${t}d ${n}h`:`${t}d`}var ye=e=>e?`${te(Math.max(0,Date.now()/1e3-e))} ago`:"\u2014";function we(e,t){return e==null||!isFinite(e)?"\u2014":`${e>=1e6?`${(e/1e6).toFixed(2)}M`:e>=1e3?`${(e/1e3).toFixed(1)}K`:e.toFixed(1)} ${t||""}`.trim()}var ne=e=>e==null?"\u2014":Number(e).toLocaleString("en-US"),ie={bundleExDev:10,fresh:25,top10:35};function le(e){let t=new Map,n=(i,d)=>{i&&(t.has(i)||t.set(i,new Set),t.get(i).add(d))},r=e.dev&&e.dev.creator||e.bundles&&e.bundles.creator||e.holders&&e.holders.curve&&e.holders.curve.creator;if(r&&n(r,"dev"),e.bundles&&e.bundles.buyers)for(let i of e.bundles.buyers)i.isDev||n(i.wallet,"bundle");if(e.funding&&e.funding.groups)for(let i of e.funding.groups)for(let d of i.wallets)n(d,i.isDev?"dev-funded":"shared-funder");if(e.fresh&&e.fresh.rows)for(let i of e.fresh.rows)i.fresh&&n(i.wallet,"fresh");return t}var re=e=>!!e&&(e.has("dev")||e.has("bundle")||e.has("dev-funded")||e.has("shared-funder")),$e={dev:"dev wallet",bundle:"bought in first slots","dev-funded":"funded by dev","shared-funder":"shares a funder",fresh:"fresh wallet"};function Me(e){let t={},n=e.dev;if(n){let c=n.counts||{},s=n.current,u=null;s&&(u=`dev bought ${A(s.devBoughtPct)}`,u+=s.firstSellAfterSec==null?" \xB7 no sells yet":` \xB7 sold ${A(s.devSoldPct)} \xB7 first after ${te(s.firstSellAfterSec)}`),t.dev={value:n.creator?String(c.launches??0):"\u2014",unit:c.launches===1?"earlier launch":"earlier launches",flag:(c.dumpedWithinHour||0)>0||!!(s&&s.dumpedWithinHour),verdict:n.verdict,creator:n.creator,thisCoin:u,thisCoinFlag:!!(s&&s.dumpedWithinHour),split:n.creator?`${c.migrated||0} migrated \xB7 ${c.trading||0} trading \xB7 ${c.dead||0} dead`:null,notes:n.notes||[]}}let r=e.bundles;if(r)if(!r.reached||!r.buyers)t.bundles={value:"\u2014",unit:"bought in first slots",notes:r.notes||[],flag:!1};else{let c=e.funding,s=c&&c.groups||[],u=s.filter(x=>!x.isDev).reduce((x,o)=>x+o.wallets.length,0),h=s.filter(x=>x.isDev).reduce((x,o)=>x+o.wallets.length,0),v=null;if(c){let x=[];u&&x.push(`${u} share ${s.filter($=>!$.isDev).length===1?"one funder":"funders"}`),h&&x.push(`${h} funded by dev`);let o=c.rows.filter($=>$.funder).length;v=x.length?x.join(" \xB7 "):`no shared funder among ${o} traced`}t.bundles={value:A(r.combinedPct,1),unit:`bought in first ${r.slots} slots`,flag:r.exDevPct>=ie.bundleExDev||u>0||h>0,line:`${r.wallets} wallet${r.wallets===1?"":"s"} \xB7 dev ${A(r.buyers.filter(x=>x.isDev).reduce((x,o)=>x+o.pct,0))} \xB7 others ${A(r.exDevPct)}`,funding:v,fundingFlag:u>0||h>0,buyers:r.buyers.slice(0,6),notes:(r.notes||[]).concat(c&&c.notes||[])}}let i=e.fresh;if(i){let c=i.fresh;t.fresh={value:c.pct==null?"\u2014":A(c.pct,0),unit:"of top-20 holders fresh",flag:c.pct!=null&&c.pct>=ie.fresh,line:`${c.fresh} of ${c.known} dated wallets funded <24h before buying${c.checked-c.known?` \xB7 ${c.checked-c.known} couldn't be dated`:""}`,notes:i.notes||[]}}let d=e.holders;if(d)if(!d.holders)t.top10={value:"\u2014",unit:"held by top 10",notes:d.notes||[],flag:!1};else{let c=d.holders.excluded.filter(s=>s.pct>=.01).map(s=>`${s.tag==="curve"?"bonding curve":s.tag==="burn"?"burned":"pool/program"} ${A(s.pct,1)}`);t.top10={value:A(d.holders.top10Pct,1),unit:"held by top 10 wallets",flag:d.holders.top10Pct>=ie.top10,line:c.length?`excludes ${c.slice(0,2).join(" \xB7 ")}`:"no curve or pool balance to exclude",holders:`${ne(d.holders.holderCount)}${d.holders.capped?"+":""} holders read`,top:d.holders.top20.slice(0,10).map(s=>s.pct),notes:d.notes||[]}}return t}var P=Object.assign({NAME:"Prism",TICKER:"PRISM",CA:"",CHAIN:"solana",PAD:"pumpfun",PAIR:"",X:"",BUY:"",CHART:"",API:""},window.PRISM_CFG||{}),f=(e,t=document)=>t.querySelector(e),fe=(e,t=document)=>[...t.querySelectorAll(e)],g=e=>String(e??"").replace(/[&<>"']/g,t=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"})[t]),pe=matchMedia("(prefers-reduced-motion: reduce)").matches,Ae=e=>`https://solscan.io/account/${e}`;fe("[data-cfg]").forEach(e=>{let t=P[e.dataset.cfg];t&&(e.textContent=t)});fe("[data-cfg-href]").forEach(e=>{let t=P[e.dataset.cfgHref];t&&(e.href=t,e.target="_blank",e.rel="noopener",e.hidden=!1)});P.CA&&(f("#caBox").hidden=!1,f("#caWait").hidden=!0,f("#tkActions").hidden=!1,f("#caText").textContent=P.CA,f("#buyBtn").href=P.BUY||`https://pump.fun/coin/${P.CA}`,f("#chartBtn").href=P.CHART||`https://gmgn.ai/sol/token/${P.CA}`,f("#selfXray").addEventListener("click",e=>{e.preventDefault(),H.value=P.CA,V(),he(P.CA)}));var Fe=(P.API||"").replace(/\/+$/,""),ue=Fe||(location.origin&&location.origin!=="null"?location.origin:"");f("#originText").textContent=ue||"this site\u2019s address";function se(e,t,n="copied"){let r=()=>{if(!t)return;let i=t.dataset.o||t.innerHTML;t.dataset.o=i,t.classList.add("ok");let d=t.querySelector(".copy-ic")||t,c=d.textContent;d.textContent=n,setTimeout(()=>{d.textContent=c},1300)};navigator.clipboard&&navigator.clipboard.writeText?navigator.clipboard.writeText(e).then(r,r):r()}f("#caCopy").addEventListener("click",e=>se(P.CA,e.currentTarget));f("#originCopy").addEventListener("click",e=>ue&&se(ue,e.currentTarget));var U=f("#tip"),k=xe({gl:f("#coinGl"),dots:f("#coinDots"),fallbackImg:f("#coinFlat"),reduced:pe,onHover:e=>{if(!e){U.hidden=!0;return}let t=e.dot,n=[...t.flags||[]].map(i=>`<span class="fl${i==="fresh"||re(new Set([i]))?" e":""}">${g($e[i]||i)}</span>`).join("");U.innerHTML=`<b>${g(q(t.id))}</b><div class="pc">${g(A(t.p))}</div><span>of supply</span>${n?`<div>${n}</div>`:""}<span class="hint">${matchMedia("(pointer: coarse)").matches?"tap another dot":"click to open on Solscan"}</span>`;let r=f("#coinBox").getBoundingClientRect();U.style.left=`${Math.max(110,Math.min(r.width-110,e.x))}px`,U.style.top=`${Math.max(120,e.y-t.sr)}px`,U.hidden=!1},onClickDot:e=>window.open(Ae(e.id),"_blank","noopener")}),ke=f("#coinHint"),_=(e,t,n)=>{ke.innerHTML=`<span>${g(e)}</span>${g(t)}`,ke.classList.toggle("busy",!!n)},Ie=f("#scanForm"),H=f("#caInput"),ze=f("#slotHint"),Se=f("#slotStatus"),V=()=>{ze.hidden=!!H.value};H.addEventListener("input",V);H.addEventListener("paste",()=>setTimeout(()=>{V(),H.value.trim().length>=32&&Ie.requestSubmit()},0));V();var Z=(e,t)=>{Se.textContent=e||"",Se.classList.toggle("err",!!t)};async function He(e){let t=new AbortController,n=setTimeout(()=>t.abort(),16e3);try{let r=await fetch(e,{headers:{accept:"application/json"},signal:t.signal}),i=null;try{i=await r.json()}catch{i=null}return{ok:r.ok,status:r.status,body:i}}finally{clearTimeout(n)}}var We=be({api:Fe,fetchJson:He}),z={dev:f("#cardDev"),bundles:f("#cardBundles"),fresh:f("#cardFresh"),top10:f("#cardTop")},nt=Object.fromEntries(Object.entries(z).map(([e,t])=>[e,t.querySelector(".cb").innerHTML])),je='<span class="sk big"></span><span class="sk w90"></span><span class="sk w60"></span>';function T(e,t,n,r){let i=z[e],d=i.dataset.state;i.dataset.state=t,i.classList.toggle("flag",!!r),i.querySelector(".st").textContent={idle:"",loading:"reading",live:r?"flagged":"live",error:"couldn't read",offline:"offline"}[t]||"",i.querySelector(".cb").innerHTML=n,t==="live"&&d!=="live"&&!pe&&(i.classList.remove("pop"),i.offsetWidth,i.classList.add("pop"),Ue(i.querySelector(".val strong")))}function Ue(e){let t=e&&e.textContent.match(/^([\d.]+)(.*)$/);if(!t)return;let n=parseFloat(t[1]),r=(t[1].split(".")[1]||"").length,i=performance.now(),d=c=>{let s=Math.min(1,(c-i)/700),u=1-Math.pow(1-s,3);e.textContent=(n*u).toFixed(r)+t[2],s<1&&requestAnimationFrame(d)};requestAnimationFrame(d)}var N=e=>e&&e.length?`<p class="card-notes">${e.map(t=>g(t)).join("<br>")}</p>`:"",W=e=>`<p class="ln"><span class="e">couldn't read:</span> ${g(e)}</p>`;function Ne(e,t){if(t)return T("dev","error",W(t));let n=e.dev;n&&T("dev","live",`
+    <div class="val"><strong>${g(n.value)}</strong><span>${g(n.unit)}</span></div>
+    ${n.verdict?`<p class="ln mono only-narrow${n.flag?" e":""}">${g(n.verdict)}</p>`:""}
+    ${n.creator?`<p class="ln">creator <a href="${Ae(n.creator)}" target="_blank" rel="noopener" class="mono">${g(q(n.creator))}</a></p>`:""}
+    ${n.thisCoin?`<p class="ln">this coin: <span class="${n.thisCoinFlag?"e":""}">${g(n.thisCoin)}</span></p>`:""}
+    ${n.split&&n.value!=="0"?`<p class="ln mono">${g(n.split)}</p><a class="more" href="#history">full history \u2193</a>`:""}
+    ${N(n.notes)}`,n.flag)}function Re(e,t,n){if(t)return T("bundles","error",W(t));let r=e.bundles;if(!r)return;if(r.value==="\u2014")return T("bundles","error",`${N(r.notes)||W("no early-slot data")}`);let i=d=>{let c=S.flags&&S.flags.get(d.wallet);return d.isDev?'<span class="tg e">dev</span>':c&&c.has("dev-funded")?'<span class="tg e">dev-funded</span>':c&&c.has("shared-funder")?'<span class="tg e">shared funder</span>':`<span class="tg">slot +${d.slotOffset}</span>`};T("bundles","live",`
+    <div class="val"><strong>${g(r.value)}</strong><span>${g(r.unit)}</span></div>
+    <p class="ln mono">${g(r.line)}</p>
+    ${n?'<span class="sk w80"></span>':r.funding?`<p class="ln${r.fundingFlag?" e":""}">${g(r.funding)}</p>`:""}
+    ${r.buyers.length?`<ul class="mini">${r.buyers.slice(0,3).map(d=>`<li><span>${g(q(d.wallet))}</span>${i(d)}<b>${g(A(d.pct))}</b></li>`).join("")}</ul>`:""}
+    ${N(r.notes)}`,r.flag)}function Le(e,t){if(t)return T("fresh","error",W(t));let n=e.fresh;n&&T("fresh","live",`
+    <div class="val"><strong>${g(n.value)}</strong><span>${g(n.unit)}</span></div>
+    <p class="ln">${g(n.line)}</p>${N(n.notes)}`,n.flag)}function Ge(e,t){if(t)return T("top10","error",W(t));let n=e.top10;if(!n)return;if(n.value==="\u2014")return T("top10","error",N(n.notes)||W("no holder data"));let r=n.top.reduce((i,d)=>i+d,0)||1;T("top10","live",`
+    <div class="val"><strong>${g(n.value)}</strong><span>${g(n.unit)}</span></div>
+    <div class="bars" aria-hidden="true">${n.top.map(i=>`<i style="flex:${(i/r).toFixed(4)}"></i>`).join("")}</div>
+    <p class="ln">${g(n.line)}</p><p class="ln mono">${g(n.holders)}</p>${N(n.notes)}`,n.flag)}var S={};function Y(){S.flags=le(S),k.restyle(e=>{let t=S.flags.get(e.id);return{flags:t,ember:re(t),ring:!!(t&&t.has("fresh"))}})}function Qe(e){let t=f("#history");if(!e||!e.launches||!e.launches.length){t.hidden=!0;return}t.hidden=!1,f("#historySub").textContent=`${e.verdict}. Creator ${q(e.creator)}${e.truncated?`, last ${e.scanned} transactions scanned`:`, ${e.scanned} transactions scanned`}.`,f("#histBody").innerHTML=e.launches.map(n=>`
+    <tr>
+      <td class="coin-c"><b>${g(n.name||"unnamed")}</b> <span class="mono">$${g(n.symbol||"?")}</span><a href="https://pump.fun/coin/${g(n.mint)}" target="_blank" rel="noopener">${g(q(n.mint))} \u2197</a></td>
+      <td data-l="launched">${g(ye(n.createdAt))}</td>
+      <td data-l="now"><span class="pill ${g(n.status)}">${g(n.status)}</span></td>
+      <td class="r" data-l="mcap">${g(n.status==="migrated"?"on AMM":we(n.mcap,n.quote))}</td>
+      <td class="r" data-l="dev bought">${g(A(n.devBoughtPct))}</td>
+      <td class="r${n.dumpedWithinHour?" e":""}" data-l="dev sold">${g(A(n.devSoldPct))}</td>
+      <td class="r${n.firstSellAfterSec!=null&&n.firstSellAfterSec<3600?" e":""}" data-l="first sell">${g(n.firstSellAfterSec==null?"never":te(n.firstSellAfterSec))}</td>
+    </tr>`).join(""),f("#histNotes").textContent=(e.notes||[]).join(" \xB7 ")}function Ke(e,...t){if(e==="invalid"){Z(t[0],!0),_("idle","waiting for a coin address"),f("#scanBtn").disabled=!1,k.loading(!1);return}if(e==="start"){S={},Z("Resolving address\u2026"),_("cutting","opening the coin",!0),k.clearDots(),k.open(),k.loading(!0),f(".stage").classList.add("scanned");for(let n of Object.keys(z))T(n,"loading",je);f("#tokenCard").hidden=!0,f("#verdictBox").hidden=!0,f("#history").hidden=!0;return}if(e==="offline"){Z("couldn't reach the Prism API",!0),_("offline","no live data available here"),k.loading(!1);for(let n of Object.keys(z))T(n,"offline",W(`${t[0]}. Numbers appear only when the live API answers.`));f("#scanBtn").disabled=!1;return}if(e==="mint"){let n=t[0];S.mint=n,Z(`Reading ${q(n)} from Solana\u2026`),_("reading","chain data",!0);let r=new URL(location.href);r.searchParams.set("ca",n),history.replaceState(null,"",r),f("#mintShort").textContent=q(n),f("#tokenPump").href=`https://pump.fun/coin/${n}`;return}if(e==="block"){let[n,r,i,d]=t;Object.assign(S,{holders:d.holders,dev:d.dev,bundles:d.bundles,fresh:d.fresh,funding:d.funding}),S.flags=le(S);let c=Me(S);if(n==="holders"&&(Ge(c,i),i&&(Le(c,i),_("partial","couldn't read holders"),k.loading(!1)),r)){let s=r.token||{};f("#tokenCard").hidden=!1,f("#tokenName").textContent=s.name||"Unnamed coin",f("#tokenSym").textContent=s.symbol?`$${s.symbol}`:"";let u=f("#tokenImg");s.image?(u.hidden=!1,u.onerror=()=>{u.hidden=!0},u.src=s.image):u.hidden=!0;let h=r.holders&&r.holders.dots||[];k.loading(!1),k.setDots(h.map(v=>({id:v.w,p:v.p}))),Y(),_("live",`${ne(h.length)} wallet${h.length===1?"":"s"} mapped`),h.length||_("live","no wallet holders found")}n==="dev"&&(Ne(c,i),r&&r.verdict&&(f("#verdictBox").hidden=!1,f("#verdictLine").textContent=r.verdict,f("#verdictLine").classList.toggle("ember",!!(c.dev&&c.dev.flag)),f("#verdictSub").textContent=r.creator?`creator ${q(r.creator)} \xB7 ${r.truncated?`last ${r.scanned}`:r.scanned} tx scanned`:""),Qe(r),Y()),n==="bundles"&&(Re(c,i,!!(r&&r.buyers&&r.buyers.length)),Y()),n==="fresh"&&(Le(c,i),Y()),n==="funding"&&(Re(c,S.bundles?null:i,!1),i&&S.bundles&&z.bundles.querySelector(".cb").insertAdjacentHTML("beforeend",`<p class="card-notes"><span class="e">couldn't trace funders:</span> ${g(i)}</p>`),Y());return}if(e==="done"){f("#scanBtn").disabled=!1;let n=[...(S.flags||new Map).values()].filter(i=>re(i)||i.has("fresh")).length;Z(`Read live from Solana at ${new Date().toLocaleTimeString([],{hour:"2-digit",minute:"2-digit"})}`);let r=k.dotsLive().length;r&&_("live",`${ne(r)} wallets mapped \xB7 ${n} flagged`)}}function he(e){f("#scanBtn").disabled=!0,U.hidden=!0,We.run(e,Ke)}Ie.addEventListener("submit",e=>{e.preventDefault(),he(H.value)});f("#mintCopy").addEventListener("click",e=>S.mint&&se(S.mint,e.currentTarget));f("#shareBtn").addEventListener("click",async e=>{let t=location.href;if(navigator.share&&matchMedia("(pointer: coarse)").matches)try{await navigator.share({title:"Prism x-ray",url:t});return}catch{}se(t,e.currentTarget,"link copied")});var Xe={dev:e=>!!(e.flags&&(e.flags.has("dev")||e.flags.has("dev-funded"))),bundles:e=>!!(e.flags&&(e.flags.has("bundle")||e.flags.has("shared-funder")||e.flags.has("dev-funded")||e.flags.has("dev"))),fresh:e=>!!e.ring,top10:e=>k.dotsLive().slice().sort((n,r)=>r.p-n.p).slice(0,10).includes(e)};for(let[e,t]of Object.entries(z))t.addEventListener("mouseenter",()=>{t.dataset.state==="live"&&k.dotsLive().length&&k.focus(Xe[e])}),t.addEventListener("mouseleave",()=>k.focus(null));var ce=f("#leaders"),Ze=f(".stage"),Ye={dev:38,bundles:12,fresh:-12,top10:-38};function Ce(){if(requestAnimationFrame(Ce),innerWidth<=1080){ce.childElementCount&&(ce.innerHTML="");return}let e=Ze.getBoundingClientRect();if(e.bottom<0||e.top>innerHeight)return;let t=f("#coinBox").getBoundingClientRect(),n=k.dotsLive().filter(d=>d.sx!=null),r=d=>n.length?d==="dev"?n.find(c=>c.flags&&c.flags.has("dev")):d==="bundles"?n.filter(c=>c.flags&&(c.flags.has("bundle")||c.flags.has("shared-funder")||c.flags.has("dev-funded"))).sort((c,s)=>s.p-c.p)[0]:d==="fresh"?n.find(c=>c.ring):n.slice().sort((c,s)=>s.p-c.p)[0]:null,i="";for(let[d,c]of Object.entries(z)){let s=c.getBoundingClientRect(),u=s.left-e.left-1,h=s.top-e.top+21,v=r(d),x,o,$=!1;if(v)x=t.left-e.left+v.sx,o=t.top-e.top+v.sy,$=!!v.ember||!!v.ring;else{let E=Ye[d]*Math.PI/180,B=k.project(.99*Math.cos(E),.99*Math.sin(E),0);x=t.left-e.left+B.x,o=t.top-e.top+B.y}let y=Math.max(x+30,u-70),F=$&&c.classList.contains("flag")?' class="e"':"";i+=`<g${F}><path d="M${x.toFixed(1)} ${o.toFixed(1)} C${y.toFixed(1)} ${o.toFixed(1)} ${(u-50).toFixed(1)} ${h.toFixed(1)} ${u.toFixed(1)} ${h.toFixed(1)}"/><circle cx="${x.toFixed(1)}" cy="${o.toFixed(1)}" r="${v?2.2:2.6}"${F}/>${v?`<circle class="ring" cx="${x.toFixed(1)}" cy="${o.toFixed(1)}" r="${(v.sr+5).toFixed(1)}"/>`:""}<circle cx="${u.toFixed(1)}" cy="${h.toFixed(1)}" r="2"/></g>`}ce.innerHTML=i}requestAnimationFrame(Ce);if(!pe&&"IntersectionObserver"in window){let e=fe(".sec-head, .how-grid li, .ext-copy, .ext-fig, .tk-mark, .tk-copy");e.forEach(n=>n.classList.add("rv"));let t=new IntersectionObserver(n=>n.forEach(r=>{r.isIntersecting&&(r.target.classList.add("in"),t.unobserve(r.target))}),{rootMargin:"0px 0px -8% 0px"});e.forEach(n=>t.observe(n))}var de=new URLSearchParams(location.search).get("ca");de&&(H.value=de,V(),he(de));})();
+</script>
+</body>
+</html>

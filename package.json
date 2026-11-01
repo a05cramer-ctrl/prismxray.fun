@@ -1,0 +1,7 @@
+{
+  "name": "prism-site",
+  "private": true,
+  "description": "Prism coin x-ray: static page + Vercel serverless functions in api/. The API has no runtime dependencies (base58, PDA and decoders are in api/_*.js).",
+  "engines": { "node": ">=18" },
+  "dependencies": {}
+}
